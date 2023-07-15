@@ -1,6 +1,6 @@
-# Last Update - 10/07/2023
+# Last Update - 15/07/2023
 
-# Sin-TacoTruckRob
+# Sin-TacoTruckRob ESX & QBCore
 Custom Made Taco Truck Robbery For FiveM
 
 # Preview - https://youtu.be/qX1jjgB8c0Y
@@ -10,6 +10,9 @@ Custom Made Taco Truck Robbery For FiveM
 - Police Alerts
 - Optimized
 - Advanced Config
+
+# Dependencies
+- [cs_lib](https://github.com/CScripts-Network/cs_lib/)
 
 # Disclaimer
 - Feel to Edit Code.
