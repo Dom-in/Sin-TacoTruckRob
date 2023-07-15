@@ -1,4 +1,7 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local Core = exports['cs_lib']:GetLib()
+Citizen.CreateThread(function()
+  while not Core.FrameworkIsReady() do Wait(1000); end
+end)
 local CanDelivery = false
 local CheckInV = false
 local CheckInVDelivery = false
@@ -34,13 +37,12 @@ Citizen.CreateThread(function()
 end)
 
 function CheckStartRob()
-  QBCore.Functions.TriggerCallback('sin-Tacotrcukrob:server:checkTime', function(time)
+  Core.TriggerCallback('sin-Tacotrcukrob:server:checkTime', function(time)
       if time then
           TacoTruckBlip = addBlip(Config['Rob']['TruckSpawnCfg'], 67, 1, 'Truck Locaion')
-          QBCore.Functions.Notify('Taco Truck Robbery Started. Check Truck Locaion in Map')
+          Core.Notification('Taco Truck Robbery Started. Check Truck Locaion in Map')
           SpawnGuardsandTruck()
           ClearArea(Config['Rob']['TruckSpawnCfg'], 50.0)
-
       end
   end)
 end
@@ -112,7 +114,7 @@ function CheckInVehicle()
 
     if GetVehicleNumberPlateText(vehicle) == "SINFTUCK" then
       DeliveryBlip = addBlip(deliveryLocation.vector, 162, 5, 'Delivery Location')
-      SetNewWaypoint(deliveryLocation.vector.x,deliveryLocation.vector.y)
+      Core.WayPoint(deliveryLocation.vector.x,deliveryLocation.vector.y)
       CheckInV = false
       CheckInVDelivery = true
     end
@@ -138,12 +140,12 @@ function Delivery()
           DeleteEntity(Tacotruck)
           DeletePed(guardPed)
           TriggerServerEvent('sin-Tacotrcukrob:server:finish', deliveryLocation.sellprice, deliveryLocation.item, deliveryLocation.itemamount)
-          QBCore.Functions.Notify('Sold for $'..deliveryLocation.sellprice, 'success')
-          QBCore.Functions.Notify('You recived ' .. ' '..deliveryLocation.item, 'success')
-          QBCore.Functions.Notify(deliveryLocation.itemamount.. "Items", "success")
+          Core.Notification('Sold for $'..deliveryLocation.sellprice, 'success')
+          Core.Notification('You recived ' .. ' '..deliveryLocation.item, 'success')
+          Core.Notification(deliveryLocation.itemamount.. "Items", "success")
           CheckInVDelivery = false
         else
-          QBCore.Functions.Notify('Not Right Vehicle')
+          Core.Notification('Not Right Vehicle')
         end
       end
     end
